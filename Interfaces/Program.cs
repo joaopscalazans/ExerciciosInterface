@@ -1,6 +1,7 @@
 ﻿using Interfaces.ex01;
 using Interfaces.ex02;
 using Interfaces.ex03;
+using Interfaces.ex04;
 
 namespace Interfaces;
 
@@ -88,4 +89,32 @@ class Program
         
         Console.WriteLine();
     }
+
+    static void Ex04()
+    {
+        Console.WriteLine("============EX04=======");
+        Console.WriteLine("!!! NESSE NÃO SABIA COMO IMPLEMENTAR, ENTÃO FICOU SO TEXTO MESMO !!!");
+
+        List<IProcessarPagamento> pps = new List<IProcessarPagamento>
+        {
+            new ProcessadorBoleto(),
+            new ProcessadorCardaoCerdido(),
+            new ProcessadorPayPal()
+        };
+
+        foreach (var pp in pps)
+        {
+            if (pp is ProcessadorCardaoCerdido)
+            {
+                pp.CancelarPagamento();
+            }
+            else
+            {
+                pp.ProcessarPagamento(200);
+            }
+            
+        }
+    }
+    
+    
 }
