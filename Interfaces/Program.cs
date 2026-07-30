@@ -5,6 +5,7 @@ using Interfaces.ex03;
 using Interfaces.ex04;
 using Interfaces.ex05;
 using Interfaces.ex06;
+using Interfaces.ex07;
 
 namespace Interfaces;
 
@@ -17,6 +18,7 @@ class Program
         Ex03();
         Ex05();
         Ex06();
+        Ex07();
     }
 
     static void Ex01()
@@ -156,6 +158,17 @@ class Program
             else if(x is NotificadorWhatsApp || x is NotificardorSMS)
                 x.EnviarMensagem("Foi autorizado no seu cartão Nubank um valor de R$2.000.\n Se foi o senhor(a) o autor do pagamento\n por favor nos encaminhar o cpf e os tres digitos na parte de trás do cartão", "+559999999-9999");
         });
+    }
+
+    static void Ex07()
+    {
+        Console.WriteLine("============EX07=======");
+        new List<IFretavel>
+        {
+            new Eletronico(),
+            new Livro(),
+            new Movel()
+        }.ForEach(x => x.CalcularFrete(50));
     }
     
     
