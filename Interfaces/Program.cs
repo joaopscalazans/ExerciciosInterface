@@ -1,7 +1,10 @@
-﻿using Interfaces.ex01;
+﻿using System.Runtime.InteropServices;
+using Interfaces.ex01;
 using Interfaces.ex02;
 using Interfaces.ex03;
 using Interfaces.ex04;
+using Interfaces.ex05;
+using Interfaces.ex06;
 
 namespace Interfaces;
 
@@ -12,6 +15,8 @@ class Program
         Ex01();
         Ex02();
         Ex03();
+        Ex05();
+        Ex06();
     }
 
     static void Ex01()
@@ -114,6 +119,43 @@ class Program
             }
             
         }
+    }
+    
+    static void Ex05()
+    {
+        Console.WriteLine("============EX05=======");
+        new List<UnidosVeceremos.ITransport>
+        {
+            new UnidosVeceremos.Aviao(),
+            new UnidosVeceremos.Carro(),
+            new UnidosVeceremos.Trem()
+        }.ForEach(x =>
+        {
+            Console.WriteLine(x.GetType().Name);
+            x.ViagemDestino("Paris");
+            x.FinalizarViagem();
+        });
+    }
+    
+    
+    static void Ex06()
+    {
+        Console.WriteLine("============EX06=======");
+        new List<INotificador>
+        {
+            new NotificadorEmail(),
+            new NotificadorWhatsApp(),
+            new NotificardorSMS()
+        }
+        .ForEach(x =>
+        {
+            Console.WriteLine();
+            Console.WriteLine(x.GetType().Name);
+            if(x is NotificadorEmail)
+            x.EnviarMensagem("Foi autorizado no seu cartão Nubank um valor de R$2.000.\n Se foi o senhor(a) o autor do pagamento\n por favor nos encaminhar o cpf e os tres digitos na parte de trás do cartão", "Maria do Socorro");
+            else if(x is NotificadorWhatsApp || x is NotificardorSMS)
+                x.EnviarMensagem("Foi autorizado no seu cartão Nubank um valor de R$2.000.\n Se foi o senhor(a) o autor do pagamento\n por favor nos encaminhar o cpf e os tres digitos na parte de trás do cartão", "+559999999-9999");
+        });
     }
     
     
